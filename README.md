@@ -8,7 +8,28 @@ This repository serves as my personal submission for the Final Project in the [A
 
 ## Project Structure
 
-@TODO
+```
+apis-final-project-meta
+    │
+    LittleLemon/
+    │    ├───LittleLemon/
+    │    │       ├───asgi.py
+    │    │       ├───settings.py
+    │    │       ├───urls.py
+    │    │       └───wsgi.py
+    │    ├───LittleLemonAPI/
+    │    │       ├───admin.py
+    │    │       ├───apps.py
+    │    │       ├───models.py
+    │    │       ├───serializers.py
+    │    │       ├───tests.py
+    │    │       ├───urls.py
+    │    │       └───views.py
+    │    ├───db.sqlite3
+    │    └───manage.py
+    │
+    README.md
+```
 
 
 
@@ -17,7 +38,7 @@ This repository serves as my personal submission for the Final Project in the [A
 ## Getting Started
 
 ```bash
-$ cd apis-final-project-meta
+$ cd apis-final-project-meta/LittleLemon
 
 $ pipenv shell
 
@@ -37,6 +58,8 @@ $ python3 manage.py runserver
 ## `superuser` Credentials
 
 **Username:** `admin`
+
+**Email:** `admin@littlelemon.com`
 
 **Password:** `admin@123!`
 
