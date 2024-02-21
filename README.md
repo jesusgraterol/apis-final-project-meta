@@ -1,4 +1,4 @@
-# META: APIs' Final Project
+# Meta: APIs' Final Project
 
 This repository serves as my personal submission for the Final Project in the [APIs Course](https://www.coursera.org/learn/apis?specialization=meta-back-end-developer) offered by Meta through Coursera in the [Back-End Developer Professional Certificate](https://www.coursera.org/professional-certificates/meta-back-end-developer).
 
