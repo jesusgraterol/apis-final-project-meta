@@ -20,7 +20,7 @@ class Category(Model):
 class MenuItem(Model):
   title = CharField(max_length = 255, db_index = True)
   price = DecimalField(max_digits = 6, decimal_places = 2, db_index = True)
-  features = BooleanField(db_index = True)
+  featured = BooleanField(db_index = True)
   category = ForeignKey(Category, on_delete = PROTECT)
 
 

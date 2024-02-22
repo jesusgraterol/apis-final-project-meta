@@ -79,10 +79,10 @@ $ python3 manage.py runserver
 
 1. [x] The admin can assign users to the manager group
 2. [x] You can access the manager group with an admin token
-3. [ ] The admin can add menu items 
+3. [x] The admin can add menu items 
 4. [x] The admin can add categories
 5. [x] Managers can log in 
-6. [ ] Managers can update the item of the day
+6. [x] Managers can update the item of the day
 7. [x] Managers can assign users to the delivery crew
 8. [ ] Managers can assign orders to the delivery crew
 9. [ ] The delivery crew can access orders assigned to them
@@ -90,10 +90,10 @@ $ python3 manage.py runserver
 11. [x] Customers can register
 12. [x] Customers can log in using their username and password and get access tokens
 13. [x] Customers can browse all categories 
-14. [ ] Customers can browse all the menu items at once
-15. [ ] Customers can browse menu items by category
-16. [ ] Customers can paginate menu items
-17. [ ] Customers can sort menu items by price
+14. [x] Customers can browse all the menu items at once
+15. [x] Customers can browse menu items by category
+16. [x] Customers can paginate menu items
+17. [x] Customers can sort menu items by price
 18. [ ] Customers can add menu items to the cart
 19. [ ] Customers can access previously added items in the cart
 20. [ ] Customers can place orders

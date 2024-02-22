@@ -49,11 +49,9 @@ class CategorySerializer(ModelSerializer):
 # MENU ITEM SERIALIZER #
 ########################
 class MenuItemSerializer(ModelSerializer):
-  category_id = IntegerField(write_only=True)
-
   class Meta:
     model = MenuItem
-    fields = [ 'id', 'title', 'price', 'features', 'category', 'category_id' ]
+    fields = [ 'id', 'title', 'price', 'featured', 'category' ]
 
 
 
