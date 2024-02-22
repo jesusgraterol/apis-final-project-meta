@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CategoryView, ManagerView, DeliveryCrewView, MenuItemView
+from .views import CategoryView, ManagerView, DeliveryCrewView, MenuItemView, CartView
 
 urlpatterns = [
   # User & Token Endpoints
@@ -20,7 +20,7 @@ urlpatterns = [
   path('menu-items/<int:pk>', MenuItemView.as_view()),
 
   # Cart Management Endpoints
-  # ...
+  path('cart/menu-items', CartView.as_view()),
 
   # Order Management Endpoints
   # ...

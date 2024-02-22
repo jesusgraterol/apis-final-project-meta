@@ -94,7 +94,7 @@ $ python3 manage.py runserver
 15. [x] Customers can browse menu items by category
 16. [x] Customers can paginate menu items
 17. [x] Customers can sort menu items by price
-18. [ ] Customers can add menu items to the cart
-19. [ ] Customers can access previously added items in the cart
+18. [x] Customers can add menu items to the cart
+19. [x] Customers can access previously added items in the cart
 20. [ ] Customers can place orders
 21. [ ] Customers can browse their own orders

@@ -176,8 +176,37 @@ class MenuItemView(ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, D
 #########################
 # CART MANAGEMENT VIEWS #
 #########################
+class CartView(ListAPIView, CreateAPIView):
+  serializer_class = CartSerializer
+  throttle_classes = [ AnonRateThrottle, UserRateThrottle ]
+  permission_classes = [IsAuthenticated]
 
-# ...
+  def get_queryset(self):
+     return Cart.objects.filter(user = self.request.user)
+  
+  def post(self, request):
+     menu_item_id = request.data['menu_item']
+     menu_item = get_object_or_404(MenuItem, id = menu_item_id)
+     quantity = request.data['quantity']
+     price = int(quantity) * menu_item.price
+     Cart.objects.create(
+        user = request.user,
+        menu_item = menu_item,
+        quantity = quantity,
+        unit_price = menu_item.price,
+        price = price
+     )
+     return Response(
+        { 'message': f'The item {menu_item_id} was added to the cart'}, 
+        HTTP_201_CREATED
+      )
+
+  def delete(self, request):
+     Cart.objects.filter(user = request.user).delete()
+     return Response(
+        { 'message': f'The cart items have been deleted'}, 
+        HTTP_200_OK
+      )
 
 
 

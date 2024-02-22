@@ -59,6 +59,20 @@ class MenuItemSerializer(ModelSerializer):
 # CART SERIALIZER #
 ###################
 class CartSerializer(ModelSerializer):
+  # Validations
+  def validate(self, data):
+    # validate the quantity
+    if data['quantity'] <= 0:
+      raise ValidationError(f'The quantity must be greater than 0. Received: {data["quantity"]}')
+    
+    # validate the title
+    if data['unit_price'] <= 0:
+      raise ValidationError(f'The unit price must be greater than 0. Received: {data["unit_price"]}')
+
+    # return the data if all is well
+    return super().validate(data)
+
+  # Metadata
   class Meta:
     model = Cart
     fields = [ 'id', 'user', 'menu_item', 'quantity', 'unit_price', 'price' ]
