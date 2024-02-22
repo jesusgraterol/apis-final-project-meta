@@ -1,7 +1,25 @@
+from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer, IntegerField
 from .models import Category, MenuItem, Cart, Order, OrderItem
 from re import match
 from django.core.exceptions import ValidationError
+
+#####################################
+# USER GROUP MANAGEMENT SERIALIZERS #
+#####################################
+
+class ManagerSerializer(ModelSerializer):
+  class Meta:
+    model = User
+    fields = [ 'id', 'username', 'email' ]
+
+
+class DeliveryCrewSerializer(ModelSerializer):
+  class Meta:
+    model = User
+    fields = [ 'id', 'username', 'email' ]
+
+
 
 #######################
 # CATEGORY SERIALIZER #

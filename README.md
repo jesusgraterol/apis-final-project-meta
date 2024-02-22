@@ -77,13 +77,13 @@ $ python3 manage.py runserver
 
 ## Grading Criteria
 
-1. [ ] The admin can assign users to the manager group
-2. [ ] You can access the manager group with an admin token
+1. [x] The admin can assign users to the manager group
+2. [x] You can access the manager group with an admin token
 3. [ ] The admin can add menu items 
-4. [ ] The admin can add categories
-5. [ ] Managers can log in 
+4. [x] The admin can add categories
+5. [x] Managers can log in 
 6. [ ] Managers can update the item of the day
-7. [ ] Managers can assign users to the delivery crew
+7. [x] Managers can assign users to the delivery crew
 8. [ ] Managers can assign orders to the delivery crew
 9. [ ] The delivery crew can access orders assigned to them
 10. [ ] The delivery crew can update an order as delivered

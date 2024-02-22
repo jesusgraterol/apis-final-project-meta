@@ -4,7 +4,7 @@ from rest_framework.permissions import BasePermission
 # Checks if a user is in the 'Manager' group
 class IsManager(BasePermission):
   def has_permission(self, request, view):
-    return request.user.group.filter(name = 'Manager').exists()
+    return request.user.groups.filter(name = 'Manager').exists()
   
 
 
@@ -12,4 +12,4 @@ class IsManager(BasePermission):
 # Checks if a user is in the 'DeliveryCrew' group
 class IsDeliveryCrew(BasePermission):
   def has_permission(self, request, view):
-    return request.user.group.filter(name = 'DeliveryCrew').exists()
+    return request.user.groups.filter(name = 'DeliveryCrew').exists()
