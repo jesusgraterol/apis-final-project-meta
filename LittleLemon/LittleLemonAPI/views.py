@@ -96,11 +96,15 @@ class DeliveryCrewView(GroupView):
 # CATEGORY VIEWS #
 ##################
 class CategoryView(ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView):
-	queryset = Category.objects.all()
-	serializer_class = CategorySerializer
-	throttle_classes = [ AnonRateThrottle, UserRateThrottle ]
-	permission_classes = [ IsAdminUser ]
+  queryset = Category.objects.all()
+  serializer_class = CategorySerializer
+  throttle_classes = [ AnonRateThrottle, UserRateThrottle ]
 
+  def get_permissions(self):
+    permission_classes = []
+    if self.request.method != 'GET':
+        permission_classes = [ IsAdminUser | IsManager ]
+    return [ permission() for permission in permission_classes ]
 
 
 
@@ -108,16 +112,6 @@ class CategoryView(ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView):
 ####################
 # MENU ITEMS VIEWS #
 ####################
-
-# ...
-
-
-
-
-
-###############################
-# USER GROUP MANAGEMENT VIEWS #
-###############################
 
 # ...
 

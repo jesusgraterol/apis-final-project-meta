@@ -87,9 +87,9 @@ $ python3 manage.py runserver
 8. [ ] Managers can assign orders to the delivery crew
 9. [ ] The delivery crew can access orders assigned to them
 10. [ ] The delivery crew can update an order as delivered
-11. [ ] Customers can register
-12. [ ] Customers can log in using their username and password and get access tokens
-13. [ ] Customers can browse all categories 
+11. [x] Customers can register
+12. [x] Customers can log in using their username and password and get access tokens
+13. [x] Customers can browse all categories 
 14. [ ] Customers can browse all the menu items at once
 15. [ ] Customers can browse menu items by category
 16. [ ] Customers can paginate menu items

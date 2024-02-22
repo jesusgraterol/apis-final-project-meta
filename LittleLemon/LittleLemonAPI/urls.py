@@ -18,9 +18,6 @@ urlpatterns = [
   # Menu Items Endpoints
   # ...
 
-  # User Group Management Endpoints
-  # ...
-
   # Cart Management Endpoints
   # ...
 
