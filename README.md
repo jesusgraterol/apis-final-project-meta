@@ -4,6 +4,7 @@ This repository serves as my personal submission for the Final Project in the [A
 
 
 
+![Postman Workspace](./workspace.png)
 
 
 ## Project Structure
@@ -84,9 +85,9 @@ $ python3 manage.py runserver
 5. [x] Managers can log in 
 6. [x] Managers can update the item of the day
 7. [x] Managers can assign users to the delivery crew
-8. [ ] Managers can assign orders to the delivery crew
-9. [ ] The delivery crew can access orders assigned to them
-10. [ ] The delivery crew can update an order as delivered
+8. [x] Managers can assign orders to the delivery crew
+9. [x] The delivery crew can access orders assigned to them
+10. [x] The delivery crew can update an order as delivered
 11. [x] Customers can register
 12. [x] Customers can log in using their username and password and get access tokens
 13. [x] Customers can browse all categories 
@@ -96,5 +97,5 @@ $ python3 manage.py runserver
 17. [x] Customers can sort menu items by price
 18. [x] Customers can add menu items to the cart
 19. [x] Customers can access previously added items in the cart
-20. [ ] Customers can place orders
-21. [ ] Customers can browse their own orders
+20. [x] Customers can place orders
+21. [x] Customers can browse their own orders

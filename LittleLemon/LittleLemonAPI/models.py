@@ -55,7 +55,7 @@ class Order(Model):
 # ORDER ITEM MODEL #
 ####################
 class OrderItem(Model):
-  order = ForeignKey(User, on_delete = CASCADE)
+  order = ForeignKey(Order, on_delete = CASCADE)
   menu_item = ForeignKey(MenuItem, on_delete = CASCADE)
   quantity = SmallIntegerField()
   unit_price = DecimalField(max_digits = 6, decimal_places = 2)

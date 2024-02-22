@@ -1,3 +1,5 @@
+from functools import reduce
+from datetime import date
 from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator, EmptyPage
@@ -213,5 +215,93 @@ class CartView(ListAPIView, CreateAPIView):
 ##########################
 # ORDER MANAGEMENT VIEWS #
 ##########################
+class OrderView(ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView):
+  serializer_class = OrderSerializer
+  throttle_classes = [ AnonRateThrottle, UserRateThrottle ]
 
-# ...
+  def get_queryset(self):
+     # retrieve all the orders if it is the admin or a manager
+     if self.request.user.is_superuser or self.request.user.groups.filter(name = 'Manager').exists():
+        return Order.objects.all()
+     # if the user belongs to the DeliveryCrew group, only return the orders assigned to him/her
+     elif self.request.user.groups.filter(name = 'DeliveryCrew').exists():
+        return Order.objects.filter(delivery_crew = self.request.user)
+     # otherwise, retrieve the users' own orders
+     else:
+        return Order.objects.filter(user = self.request.user)
+     
+  def get_permissions(self):
+    permission_classes = []
+    # users can send GET and POST requests as long as they are authenticated
+    if self.request.method == 'GET' or self.request.method == 'POST':
+      permission_classes = [ IsAuthenticated ]
+    # the delivery crew can patch the status of the order
+    elif self.request.method == 'PATCH':
+       permission_classes = [ IsDeliveryCrew ]
+    # the manager and the admin can assign an order to a delivery crew user or delete it
+    elif self.request.method == 'PUT' or self.request.method == 'DELETE':
+       permission_classes = [ IsManager | IsAdminUser ]
+    return [ permission() for permission in permission_classes ]
+       
+  def post(self, request):
+    # init the cart model and make sure there are items in it
+    cart = Cart.objects.filter(user = request.user)
+    cart_items = cart.values()
+    if len(cart_items) == 0:
+      return Response({'message': 'Cannot place an order for an empty cart'}, HTTP_400_BAD_REQUEST)
+    
+    # calculate the amount of money the order is worth
+    order_total = reduce(lambda x, y: x['price'] + y['price'], cart_items)
+
+    # store the order
+    order = Order.objects.create(
+       user = request.user, 
+       status = False, 
+       total = order_total, 
+       date = date.today()
+    )
+
+    # store each cart item in the order items
+    for item in cart_items:
+       menu_item = get_object_or_404(MenuItem, id = item['menu_item_id'])
+       order_item = OrderItem.objects.create(
+          order = order, 
+          menu_item = menu_item,
+          quantity = item['quantity'],
+          unit_price = item['unit_price'],
+          price = item['price'],
+        )
+       order_item.save()
+
+    # clear the cart
+    cart.delete()
+
+    # finally, return the result
+    return Response({'message': f'The order ID {order.id} has been placed'}, HTTP_201_CREATED)
+  
+  def patch(self, request, pk):
+     order = Order.objects.get(pk = pk)
+     order.status = not order.status
+     order.save()
+     return Response(
+        {'message': f'The status of the order ID {order.id} has set to {order.status}'}, 
+        HTTP_200_OK
+      )
+  
+  def put(self, request, pk):
+     # ensure the crew nickname was provided
+     delivery_crew_nickname = request.data['delivery_crew_nickname']
+     if not delivery_crew_nickname:
+        return Response({'message': 'The delivery_crew_nickname must be provided'}, HTTP_400_BAD_REQUEST)
+     
+     # retrieve the order and the delivery crew user
+     order = get_object_or_404(Order, pk = pk)
+     delivery_crew_user = get_object_or_404(User, username = delivery_crew_nickname)
+
+     # assign the order to the user
+     order.delivery_crew = delivery_crew_user
+     order.save()
+     return Response(
+        {'message': f'The delivery crew {delivery_crew_nickname} was assigned to the order {pk}'},
+        HTTP_200_OK
+     )
