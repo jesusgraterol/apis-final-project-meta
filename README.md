@@ -21,6 +21,7 @@ apis-final-project-meta
     │    │       ├───admin.py
     │    │       ├───apps.py
     │    │       ├───models.py
+    │    │       ├───permissions.py
     │    │       ├───serializers.py
     │    │       ├───tests.py
     │    │       ├───urls.py
@@ -69,7 +70,7 @@ $ python3 manage.py runserver
 
 ## Endpoints
 
-@TODO
+[Postman Workspace](https://www.postman.com/jesusgraterol/workspace/apis-final-project-meta)
 
 
 

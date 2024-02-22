@@ -1,9 +1,13 @@
 from django.urls import path
-from .views import users
+from .views import CategoryView
 
 urlpatterns = [
   # User & Token Endpoints
-	path('users/', users),
+	# These endpoints are exposed through the /auth routes
+
+  # Category Endpoints
+  path('category', CategoryView.as_view()),
+  path('category/<int:pk>', CategoryView.as_view())
 
   # Menu Items Endpoints
   # ...

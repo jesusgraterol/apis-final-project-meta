@@ -10,12 +10,12 @@ class CategorySerializer(ModelSerializer):
   # Validations
   def validate(self, data):
     # validate the slug
-    if not match('^[a-zA-Z0-9*]{3, 100}$', data['slug']):
-      raise ValidationError(f'The slug must be a valid string with a length ranging 3 - 100 chars. Received: {data['slug']}')
+    if match('^[a-zA-Z0-9*]{3,100}$', data['slug']) is None:
+      raise ValidationError(f'The slug must be a valid string with a length ranging 3 - 100 chars. Received: {data["slug"]}')
     
     # validate the title
-    if not match('^[a-zA-Z0-9]{3, 255}$', data['title']):
-      raise ValidationError(f'The title must be a valid string with a length ranging 3 - 255 chars. Received: {data['title']}')
+    if match('^[a-zA-Z0-9 ]{3,255}$', data['title']) is None:
+      raise ValidationError(f'The title must be a valid string with a length ranging 3 - 255 chars. Received: {data["title"]}')
 
     # return the data if all is well
     return super().validate(data)
